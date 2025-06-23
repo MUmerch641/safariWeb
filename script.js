@@ -920,15 +920,16 @@ class WildAfricaSafaris {
                 closeModal();
             }
         });
-    }
-
-    // Contact Form
+    }    // Contact Form with Formspree Integration
     setupContactForm() {
         const form = document.getElementById('inquiryForm');
+        const formStatus = document.getElementById('form-status');
+        const statusSuccess = formStatus.querySelector('.status-success');
+        const statusError = formStatus.querySelector('.status-error');
         
         if (!form) return;
 
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             // Basic form validation
@@ -936,7 +937,7 @@ class WildAfricaSafaris {
             const data = Object.fromEntries(formData);
             
             if (this.validateForm(data)) {
-                this.submitForm(data);
+                await this.submitFormspreeForm(form, formData);
             }
         });
 
@@ -947,6 +948,91 @@ class WildAfricaSafaris {
                 this.validateField(input);
             });
         });
+    }    async submitFormspreeForm(form, formData) {
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoading = submitBtn.querySelector('.btn-loading');
+        const formStatus = document.getElementById('form-status');
+        const statusSuccess = formStatus.querySelector('.status-success');
+        const statusError = formStatus.querySelector('.status-error');
+        
+        try {
+            // Show loading state
+            form.classList.add('submitting');
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'flex';
+            submitBtn.disabled = true;
+            
+            // Hide any existing status messages
+            formStatus.style.display = 'none';
+            statusSuccess.style.display = 'none';
+            statusError.style.display = 'none';
+
+            // Debug: Log form data
+            console.log('Submitting form data:', Object.fromEntries(formData));
+
+            // Submit to Formspree
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            console.log('Response status:', response.status);
+            console.log('Response ok:', response.ok);
+
+            if (response.ok) {
+                // Success
+                statusSuccess.style.display = 'flex';
+                formStatus.style.display = 'block';
+                
+                // Reset form
+                form.reset();
+                
+                // Scroll to success message
+                formStatus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Also try to redirect after 3 seconds as fallback
+                setTimeout(() => {
+                    if (confirm('Form submitted successfully! Would you like to go to the thank you page?')) {
+                        window.location.href = 'thank-you.html';
+                    }
+                }, 1000);
+                
+            } else {
+                // Get error details
+                const errorData = await response.text();
+                console.error('Form submission error details:', errorData);
+                throw new Error(`Form submission failed: ${response.status}`);
+            }
+            
+        } catch (error) {
+            console.error('Form submission error:', error);
+            
+            // Show error message
+            statusError.style.display = 'flex';
+            formStatus.style.display = 'block';
+            
+            // Scroll to error message
+            formStatus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Fallback: Try to submit normally if AJAX fails
+            setTimeout(() => {
+                if (confirm('There was an issue with the form submission. Would you like to try submitting it again using a different method?')) {
+                    // Remove the preventDefault and let the form submit normally
+                    form.submit();
+                }
+            }, 2000);
+            
+        } finally {
+            // Reset button state
+            form.classList.remove('submitting');
+            btnText.style.display = 'inline';
+            btnLoading.style.display = 'none';
+            submitBtn.disabled = false;
+        }
     }
 
     validateForm(data) {
@@ -1003,94 +1089,45 @@ class WildAfricaSafaris {
     isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
-    }
-
-    showFormErrors(errors) {
+    }    showFormErrors(errors) {
         // Create or update error display
         let errorDiv = document.querySelector('.form-errors');
         if (!errorDiv) {
             errorDiv = document.createElement('div');
             errorDiv.className = 'form-errors';
             errorDiv.style.cssText = `
-                background: #ff6b6b;
-                color: white;
+                background: rgba(231, 76, 60, 0.1);
+                color: #e74c3c;
+                border: 1px solid rgba(231, 76, 60, 0.3);
                 padding: 1rem;
                 border-radius: 8px;
                 margin-bottom: 1rem;
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
             `;
             document.getElementById('inquiryForm').prepend(errorDiv);
         }
 
         errorDiv.innerHTML = `
-            <strong>Please correct the following errors:</strong>
-            <ul style="margin: 0.5rem 0 0 1rem;">
-                ${errors.map(error => `<li>${error}</li>`).join('')}
-            </ul>
+            <i class="fas fa-exclamation-circle" style="margin-top: 2px; font-size: 1.1rem;"></i>
+            <div>
+                <strong>Please correct the following errors:</strong>
+                <ul style="margin: 0.5rem 0 0 0; padding-left: 1rem;">
+                    ${errors.map(error => `<li>${error}</li>`).join('')}
+                </ul>
+            </div>
         `;
 
         // Scroll to errors
         errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-        // Remove after 5 seconds
+        // Remove after 8 seconds
         setTimeout(() => {
-            errorDiv.remove();
-        }, 5000);
-    }
-
-    async submitForm(data) {
-        const submitBtn = document.querySelector('#inquiryForm button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        
-        // Show loading state
-        submitBtn.textContent = 'Sending...';
-        submitBtn.disabled = true;
-
-        try {
-            // Simulate API call (replace with actual endpoint)
-            await this.delay(2000);
-            
-            // Show success message
-            this.showSuccessMessage();
-            
-            // Reset form
-            document.getElementById('inquiryForm').reset();
-            
-        } catch (error) {
-            // Show error message
-            this.showFormErrors(['There was an error sending your message. Please try again.']);
-        } finally {
-            // Reset button
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        }
-    }
-
-    showSuccessMessage() {
-        const successDiv = document.createElement('div');
-        successDiv.className = 'form-success';
-        successDiv.style.cssText = `
-            background: var(--primary-color);
-            color: white;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            text-align: center;
-        `;
-        successDiv.innerHTML = `
-            <strong>Thank you!</strong><br>
-            Your inquiry has been sent successfully. We'll get back to you soon!
-        `;
-        
-        document.getElementById('inquiryForm').prepend(successDiv);
-        
-        // Scroll to success message
-        successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
-        // Remove after 5 seconds
-        setTimeout(() => {
-            successDiv.remove();
-        }, 5000);
-    }
+            if (errorDiv.parentNode) {
+                errorDiv.remove();
+            }
+        }, 8000);    }
 
     // Accommodation Thumbnails
     setupAccommodationThumbnails() {

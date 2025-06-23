@@ -89,7 +89,7 @@
                     </span>
                 </a>
                 
-                <a href="https://book.wildafricasafarisbw.com/" class="book-now-btn">
+                <a href="#contact" class="book-now-btn">
                     <i class="fas fa-calendar-check"></i>
                     <span>Book Now</span>
                 </a>
@@ -768,7 +768,7 @@
                         </div>
                     </div>
                     
-                    <a href="https://book.wildafricasafarisbw.com/" class="btn btn-primary">Book Your Stay</a>
+                    <a href="#contact" class="btn btn-primary">Book Your Stay</a>
                 </div>
             </div>
         </div>
@@ -941,10 +941,9 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="contact-form">
+                  <div class="contact-form">
                     <h3>Send Us a Message</h3>
-                    <form class="inquiry-form" id="inquiryForm">
+                    <form class="inquiry-form" id="inquiryForm" action="https://formspree.io/f/myzjnjdg" method="POST" accept-charset="UTF-8">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">First Name *</label>
@@ -968,12 +967,14 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="safari">Interested Safari Package</label>
-                            <select id="safari" name="safari">
+                            <label for="safari">Interested Safari Package</label>                            <select id="safari" name="safari">
                                 <option value="">Select a safari package</option>
-                                <option value="chobe-2-nights">Chobe River Front (2 Nights)</option>
-                                <option value="okavango-2-nights">Okavango Delta (2 Nights)</option>
-                                <option value="victoria-falls-12-nights">Victoria Falls & Botswana (12 Nights)</option>
+                                <option value="4-day-chobe-savuti">4-Day Chobe & Savuti Safari ($1,500)</option>
+                                <option value="5-day-chobe-savuti-khwai">5-Day Chobe, Savuti & Khwai Safari ($1,875)</option>
+                                <option value="8-day-ultimate-botswana">8-Day Ultimate Botswana Safari ($3,000)</option>
+                                <option value="9-day-victoria-falls-botswana">9-Day Victoria Falls & Botswana ($3,375)</option>
+                                <option value="10-day-grand-expedition">10-Day Grand Botswana Expedition ($3,750)</option>
+                                <option value="day-trips">Day Trips (Various Prices)</option>
                                 <option value="custom">Custom Package</option>
                             </select>
                         </div>
@@ -994,13 +995,36 @@
                                 </select>
                             </div>
                         </div>
-                        
-                        <div class="form-group">
+                          <div class="form-group">
                             <label for="message">Message</label>
                             <textarea id="message" name="message" rows="4" placeholder="Tell us about your dream safari experience..."></textarea>
                         </div>
+                          <!-- Formspree honeypot field to prevent spam -->
+                        <input type="text" name="_gotcha" style="display:none !important">
                         
-                        <button type="submit" class="btn btn-primary btn-large">Send Inquiry</button>
+                        <!-- Formspree configuration fields -->
+                        <input type="hidden" name="_subject" value="New Safari Inquiry from Website">
+                        <input type="hidden" name="_next" value="thank-you.html">
+                        
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <span class="btn-text">Send Inquiry</span>
+                            <span class="btn-loading" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                Sending...
+                            </span>
+                        </button>
+                        
+                        <!-- Form status messages -->
+                        <div id="form-status" class="form-status" style="display: none;">
+                            <div class="status-success" style="display: none;">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Thank you! Your inquiry has been sent successfully. We'll get back to you soon.</span>
+                            </div>
+                            <div class="status-error" style="display: none;">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span>Sorry, there was an error sending your message. Please try again or contact us directly.</span>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -1071,7 +1095,7 @@
                 <div class="footer-bottom-content">
                     <p>&copy; 2025 Africa Homeland Mobile Safaris. All rights reserved.</p>
                     <div class="footer-bottom-links">
-                        <a href="https://wildafricasafarisbw.com/?page_id=1703">Created by Dev Umer</a>
+                        <a href="https://www.linkedin.com/in/umer-ch-203b0b337/">Created by Dev Umer</a>
                         </div>
                 </div>
             </div>

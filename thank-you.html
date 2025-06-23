@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Africa Homeland Mobile Safaris</title>
+    <meta name="description" content="Thank you for your inquiry. We'll get back to you soon!">
+    
+    <!-- Preconnect to improve performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Modern font loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://wildafricasafarisbw.com/wp-content/uploads/2021/09/cropped-logos-32x32.jpg">
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        :root {
+            --primary-color: #4ab540;
+            --primary-dark: #3a8c34;
+            --dark-color: #2a2a2a;
+            --gray-dark: #4a4a4a;
+            --gray: #6b7280;
+            --gray-light: #e5e7eb;
+            --light-bg: #f9fafb;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.5;
+        }
+
+        .thank-you-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(74, 181, 64, 0.1), rgba(255, 255, 255, 0.9)), 
+                        url('https://wildafricasafarisbw.com/wp-content/uploads/2024/07/AFO_0302.jpg') center/cover;
+            background-attachment: fixed;
+            padding: clamp(1rem, 5vw, 2rem);
+        }
+        
+        .thank-you-card {
+            background: white;
+            padding: clamp(1.5rem, 5vw, 3rem);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            animation: slideInUp 0.6s ease-out;
+        }
+        
+        .thank-you-icon {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: var(--primary-color);
+            margin-bottom: clamp(1rem, 3vw, 1.5rem);
+            animation: bounce 1s ease-in-out;
+        }
+        
+        .thank-you-title {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            color: var(--dark-color);
+            margin-bottom: clamp(0.5rem, 2vw, 1rem);
+        }
+        
+        .thank-you-message {
+            font-size: clamp(1rem, 3.5vw, 1.2rem);
+            color: var(--gray-dark);
+            margin-bottom: clamp(1rem, 4vw, 2rem);
+            line-height: 1.6;
+        }
+        
+        .contact-info {
+            background: var(--light-bg);
+            padding: clamp(1rem, 3vw, 1.5rem);
+            border-radius: 12px;
+            margin: clamp(1rem, 4vw, 2rem) 0;
+        }
+        
+        .contact-info h4 {
+            color: var(--primary-color);
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            margin-bottom: clamp(0.5rem, 2vw, 1rem);
+        }
+        
+        .contact-links {
+            display: flex;
+            gap: clamp(0.5rem, 2vw, 1rem);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--dark-color);
+            text-decoration: none;
+            padding: clamp(0.4rem, 1.5vw, 0.5rem) clamp(0.8rem, 2vw, 1rem);
+            border-radius: 8px;
+            background: white;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-light);
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+        
+        .contact-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: clamp(0.8rem, 2.5vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: clamp(0.5rem, 2vw, 1rem);
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+        
+        .back-home-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(74, 181, 64, 0.3);
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        /* Enhanced responsive design */
+        @media (max-width: 768px) {
+            .thank-you-card {
+                padding: clamp(1rem, 4vw, 2rem);
+                margin: clamp(0.5rem, 2vw, 1rem);
+            }
+            
+            .thank-you-title {
+                font-size: clamp(1.5rem, 5vw, 2rem);
+            }
+            
+            .thank-you-message {
+                font-size: clamp(0.9rem, 3vw, 1rem);
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .contact-link {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .back-home-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .thank-you-container {
+                padding: 1rem;
+            }
+            
+            .thank-you-card {
+                padding: 1rem;
+                border-radius: 12px;
+            }
+            
+            .thank-you-icon {
+                font-size: clamp(2rem, 6vw, 3rem);
+            }
+            
+            .thank-you-title {
+                font-size: clamp(1.2rem, 4.5vw, 1.8rem);
+            }
+            
+            .thank-you-message {
+                font-size: clamp(0.85rem, 2.8vw, 0.95rem);
+            }
+            
+            .contact-info {
+                padding: 1rem;
+            }
+            
+            .contact-info h4 {
+                font-size: clamp(1rem, 2.8vw, 1.2rem);
+            }
+            
+            .contact-link, .back-home-btn {
+                font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <div class="thank-you-card">
+            <div class="thank-you-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            
+            <h1 class="thank-you-title">Thank You!</h1>
+            
+            <p class="thank-you-message">
+                Your safari inquiry has been received successfully. Our expert team will review your request and get back to you within 24 hours with a customized safari proposal tailored to your preferences.
+            </p>
+            
+            <div class="contact-info">
+                <h4>Need Immediate Assistance?</h4>
+                <div class="contact-links">
+                    <a href="tel:+26774066279" class="contact-link">
+                        <i class="fas fa-phone"></i>
+                        <span>+267 74 066 279</span>
+                    </a>
+                    <a href="https://wa.me/26774066279" class="contact-link" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="mailto:homelandmobilesafaris@gmail.com" class="contact-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email Us</span>
+                    </a>
+                </div>
+            </div>
+            
+            <p style="color: var(--gray); font-size: clamp(0.8rem, 2.5vw, 0.9rem); margin: 1rem 0;">
+                <i class="fas fa-info-circle"></i>
+                We operate every day from 8 AM to 5 PM (Botswana time)
+            </p>
+            
+            <a href="index.html" class="back-home-btn">
+                <i class="fas fa-home"></i>
+                <span>Back to Home</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Auto-redirect to home page after 30 seconds
+        setTimeout(() => {
+            if (confirm('Would you like to return to the home page?')) {
+                window.location.href = 'index.html';
+            }
+        }, 30000);
+        
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click animation to icon
+            const icon = document.querySelector('.thank-you-icon');
+            icon.addEventListener('click', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = 'bounce 1s ease-in-out';
+                }, 10);
+            });
+        });
+    </script>
+</body>
+</html>
