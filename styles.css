@@ -727,7 +727,7 @@ img {
 }
 
 .img1 {
-    grid-row: 1 / 3;
+    grid-row: 1 / 2;
 }
 
 .img2 {
@@ -740,10 +740,9 @@ img {
     grid-row: 2 / 3;
 }
 
+
 .img4 {
-    grid-column: 1 / 3;
-    grid-row: 3 / 4;
-    height: 150px;
+    grid-row: 2 / 3;
 }
 
 /* Safari Section */
